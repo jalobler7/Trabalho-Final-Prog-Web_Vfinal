@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <div *ngIf="usuario" class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Perfil do Usuário</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-2"><strong>Nome:</strong> {{ usuario.nome }}</p>
+          <p class="mb-2"><strong>Idade:</strong> {{ usuario.idade }}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-2"><strong>Profissão:</strong> {{ usuario.profissao }}</p>
+          <p class="mb-2"><strong>Sexo:</strong> {{ usuario.sexo }}</p>
+          <p class="mb-2"><strong>Email:</strong> {{ usuario.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

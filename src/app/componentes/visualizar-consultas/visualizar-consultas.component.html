@@ -1,0 +1,94 @@
+<div class="container mt-4">
+  <h2>Consultas Médicas
+    <button class="btn btn-primary" (click)="openModal(); form.reset()">
+      <i class="fas fa-plus"></i> Nova Consulta
+    </button>
+  </h2>
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Título</th>
+      <th scope="col">Data</th>
+      <th scope="col">Nome do Paciente</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let consulta of consultas">
+      <td>{{ consulta.titulo }}</td>
+      <td>{{ consulta.data | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ consulta.nomePaciente }}</td>
+      <td>{{ consulta.descricao }}</td>
+      <td>
+        <button class="btn btn-warning rounded-circle" (click)="carregarDadosConsulta(consulta)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn btn-danger rounded-circle" (click)="consulta.id !== undefined ? excluirConsulta(consulta.id) : null">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div id="add-consulta" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <ng-container *ngIf="form.value.id > 0; else novaConsulta">
+              Editar Consulta
+            </ng-container>
+            <ng-template #novaConsulta>
+              Adicionar Consulta
+            </ng-template>
+          </h5>
+          <button type="button" class="close" (click)="closeModal()">
+            <span>&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="titulo">Título</label>
+              <input id="titulo" class="form-control" formControlName="titulo" type="text" required>
+              <div *ngIf="isCampoValido('titulo')" class="text-danger">
+                <small>Campo obrigatório</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="data">Data</label>
+              <input id="data" class="form-control" formControlName="data" type="date" required>
+              <div *ngIf="isCampoValido('data')" class="text-danger">
+                <small>Campo obrigatório</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="nomePaciente">Nome do Paciente</label>
+              <input id="nomePaciente" class="form-control" formControlName="nomePaciente" type="text" required>
+              <div *ngIf="isCampoValido('nomePaciente')" class="text-danger">
+                <small>Campo obrigatório</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descricao">Descrição</label>
+              <textarea id="descricao" class="form-control" formControlName="descricao" rows="3" required></textarea>
+              <div *ngIf="isCampoValido('descricao')" class="text-danger">
+                <small>Campo obrigatório</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="imagem">Imagem</label>
+              <input id="imagem" class="form-control-file" type="file" (change)="onFileChange($event)">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Fechar</button>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <div class="login-container card">
+    <div class="card-header">
+      <h2>Login</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input id="nome" class="form-control" formControlName="nome" type="text" required>
+          <div *ngIf="form.get('nome')?.touched && form.get('nome')?.invalid" class="text-danger">
+            <small>Campo obrigatório</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="idade">Idade</label>
+          <input id="idade" class="form-control" formControlName="idade" type="number" required>
+          <div *ngIf="form.get('idade')?.touched && form.get('idade')?.invalid" class="text-danger">
+            <small>Campo obrigatório</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="profissao">Profissão</label>
+          <input id="profissao" class="form-control" formControlName="profissao" type="text" required>
+          <div *ngIf="form.get('profissao')?.touched && form.get('profissao')?.invalid" class="text-danger">
+            <small>Campo obrigatório</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" class="form-control" formControlName="sexo" required>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="outro">Outro</option>
+          </select>
+          <div *ngIf="form.get('sexo')?.touched && form.get('sexo')?.invalid" class="text-danger">
+            <small>Campo obrigatório</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" class="form-control" formControlName="email" type="email" required>
+          <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="text-danger">
+            <small>Campo obrigatório</small>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
